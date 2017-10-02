@@ -1,0 +1,44 @@
+---
+title: Reading Assignment 2
+subtitle: Localizing anomalous changes in time-evolving graphs (Sricharan, K and Das, K)
+author:
+    name: Martin Isaksson
+    email: martin.isaksson@ericsson.com
+    affiliation: RISE SICS, KTH and Ericsson Research
+---
+
+```{r Setup, include=FALSE, results="hide", warning=FALSE}
+opts_chunk$set(dev=c("png"),
+               fig.width=14,
+               fig.height=7,
+               dpi=300)
+
+hook_plot_md_martin <- function(x,options) {
+    sprintf("![%s](%s){#%s%s}", options$fig.cap, knitr:::.upload.url(x), options$fig.lp, options$label)
+}
+
+knit_hooks$set(plot = hook_plot_md_martin)
+```
+
+## Motivation
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum. [@ermarkdown]
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## References
+
+---
+nocite: |
+    @ermarkdown
+---
