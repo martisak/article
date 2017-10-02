@@ -1,10 +1,10 @@
 ---
-title: Reading Assignment 2
-subtitle: Localizing anomalous changes in time-evolving graphs (Sricharan, K and Das, K)
+title: Lorem ipsum
+subtitle: Subtitle here
 author:
     name: Martin Isaksson
-    email: martin.isaksson@ericsson.com
-    affiliation: RISE SICS, KTH and Ericsson Research
+    email: myname@mydomain.com
+    affiliation: My affiliation
 ---
 
 ```{r Setup, include=FALSE, results="hide", warning=FALSE}
