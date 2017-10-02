@@ -218,17 +218,17 @@ stringstyle=\color{mycolor3},
   xrightmargin=5pt
 }
 
-\newfontfamily\gillsans{Gill Sans}
-\newfontfamily\futura{Futura}
+\newfontfamily\gillius{Gillius}
+%\newfontfamily\futura{Futura}
 
 $if(title)$
-    \title{\futura\spacedallcaps{$title$}}
+    \title{\gillius\spacedallcaps{$title$}}
 $else$
     \title{\normalfont\spacedallcaps{Add a title}}
 $endif$
 
 $if(subtitle)$
-    \subtitle{\futura{}$subtitle$}
+    \subtitle{\gillius{}$subtitle$}
 $endif$
 
 
