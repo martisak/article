@@ -218,17 +218,17 @@ stringstyle=\color{mycolor3},
   xrightmargin=5pt
 }
 
-\newfontfamily\gillius{GilliusADF}
+%\newfontfamily\gillius{GilliusADF}
 %\newfontfamily\futura{Futura}
 
 $if(title)$
-    \title{\gillius\spacedallcaps{$title$}}
+    \title{\spacedallcaps{$title$}}
 $else$
     \title{\normalfont\spacedallcaps{Add a title}}
 $endif$
 
 $if(subtitle)$
-    \subtitle{\gillius{}$subtitle$}
+    \subtitle{$subtitle$}
 $endif$
 
 
