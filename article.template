@@ -218,7 +218,7 @@ stringstyle=\color{mycolor3},
   xrightmargin=5pt
 }
 
-\newfontfamily\gillius{Gillius}
+\newfontfamily\gillius{GilliusADF}
 %\newfontfamily\futura{Futura}
 
 $if(title)$
