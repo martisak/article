@@ -28,7 +28,7 @@ pdf: $(MD_OBJECTS) $(PDF_OBJECTS)
 
 %.pdf: %.md
 	echo $<
-	$(PANDOC) -f markdown  $(PANDOC_FILTERS) --latex-engine=xelatex --template=$(DIR)/article/article.template $(PANDOC_OPTIONS) $(PANDOC_REFERENCES)  -o $@  $<
+	$(PANDOC) -f markdown+table_captions  $(PANDOC_FILTERS) --pdf-engine=xelatex --template=$(DIR)/article/article.template $(PANDOC_OPTIONS) $(PANDOC_REFERENCES)  -o $@  $<
 
 .intermediate: $(MD_OBJECTS)
 

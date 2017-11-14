@@ -15,7 +15,7 @@
 \usepackage[
     %minionprospacing,
     %minionpro,
-    %eulerchapternumbers,
+    eulerchapternumbers,
     nochapters, % Turn off chapters since this is an article
     beramono, % Use the Bera Mono font for monospaced text (\texttt)
     %eulermath,% Use the Euler font for mathematics
@@ -27,16 +27,20 @@
 
 \usepackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
 
-\usepackage{unicode-math}
 
+\usepackage{unicode-math}
+\usepackage{MnSymbol}
 \setmainfont{Minion Pro}
 %\setsansfont{Gill Sans}
+\usepackage[italic,noendash]{mathastext}
 
 \usepackage[auth-sc]{authblk}
 
 %\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 %\usepackage[utf8]{inputenc} % Required for including letters with accents
-%\usepackage{fontspec}
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
 %\usepackage{mathspec}
 %\usepackage{unicode-math}
 
@@ -46,7 +50,14 @@
 \usepackage{graphicx} % Required for including images
 \graphicspath{{Figures/}} % Set the default folder for images
 
+\usepackage[titles]{tocloft}
+
+\numberwithin{equation}{section} %sets equation numbers
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
 \usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
 \usepackage{enumitem} % Required for manipulating the whitespace between and within lists
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage{subfig} % Required for creating figures with multiple parts (subfigures)
@@ -68,7 +79,7 @@
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{mparhack}
-
+%\usepackage[protrusion=true,final]{microtype}
 \usepackage {ragged2e}
 
 \usepackage{etoolbox}
@@ -187,15 +198,17 @@
    \prevdepth=\tpd}
 
 \newcommand{\ipaddress}[1]{\texttt{#1}}
-
+\usepackage{bm}
 \usepackage{listings}
+\usepackage{xcolor}
 
 \lstset{ %
-  backgroundcolor=\color{mycolor2},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
   basicstyle=\footnotesize\ttfamily,
   belowcaptionskip = \baselineskip,
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
+  prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}},
   frame=tb,                    % adds a frame around the code
   framesep=5pt,
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
@@ -207,7 +220,6 @@
   showtabs=false,                  % show tabs within strings adding particular underscores
   stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
   tabsize=2,                       % sets default tabsize to 2 spaces
-  xleftmargin=5pt,
   numberstyle=\tiny\color{gray},
     keywordstyle=\bfseries\color{blue},
     keywordstyle={[2]\color{green}},
@@ -215,7 +227,9 @@
 keywords=[3]{@},
 commentstyle=\color{ForestGreen},
 stringstyle=\color{mycolor3},
-  xrightmargin=5pt
+  %xrightmargin=-2cm,
+  %xleftmargin=-1cm,
+  backgroundcolor=\color{mycolor2}   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
 }
 
 %\newfontfamily\gillius{GilliusADF}
@@ -244,6 +258,9 @@ $endif$
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parindent}{0pt}}
 
+\let\tightlist\relax
+\def\tightlist{}
+
 \begin{document}
 
 \renewcommand{\sectionmark}[1]{\markright{\spacedlowsmallcaps{#1}}} % The header for all pages (oneside) or for even pages (twoside)
@@ -263,10 +280,12 @@ $endif$
 
 \setcounter{tocdepth}{2} % Set the depth of the table of contents to show sections and subsections only
 
-\tableofcontents % Print the table of contents
+$for(tables)$
+  $tables$
+$endfor$
 
+%\tableofcontents % Print the table of contents
 %\listoffigures % Print the list of figures
-
 %\listoftables % Print the list of tables
 
 %----------------------------------------------------------------------------------------
