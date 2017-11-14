@@ -12,6 +12,8 @@
 %\PassOptionsToPackage{protrusion=true,final}{microtype}
 %\newfontfeature{Microtype}{protrusion=default;expansion=default;}
 
+\usepackage[capitalise]{cleveref}
+
 \usepackage[
     %minionprospacing,
     %minionpro,
