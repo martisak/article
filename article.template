@@ -8,7 +8,7 @@
     noopticals
 ]{scrartcl}
 
-%\usepackage{fontspec}
+\usepackage{fontspec}
 %\PassOptionsToPackage{protrusion=true,final}{microtype}
 %\newfontfeature{Microtype}{protrusion=default;expansion=default;}
 
@@ -27,7 +27,7 @@
 
 \usepackage{arsclassica} % Modifies the Classic Thesis package
 
-\usepackage{unicode-math}
+%\usepackage{unicode-math}
 \usepackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
 
 %\usepackage[showframe]{geometry}
