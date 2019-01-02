@@ -27,10 +27,12 @@
 
 \usepackage{arsclassica} % Modifies the Classic Thesis package
 
+\usepackage{unicode-math}
 \usepackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
 
+%\usepackage[showframe]{geometry}
 
-\usepackage{unicode-math}
+
 \usepackage{MnSymbol}
 \setmainfont{Minion Pro}
 %\setsansfont{Gill Sans}
@@ -40,7 +42,7 @@
 
 %\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 %\usepackage[utf8]{inputenc} % Required for including letters with accents
-\usepackage{fontspec}
+%\usepackage{fontspec}
 \defaultfontfeatures{Mapping=tex-text}
 
 %\usepackage{mathspec}
@@ -79,6 +81,7 @@
 \usepackage{varioref} % More descriptive referencing
 
 \usepackage{longtable}
+
 \usepackage{booktabs}
 \usepackage{mparhack}
 %\usepackage[protrusion=true,final]{microtype}
@@ -123,6 +126,7 @@
 \usepackage{fancyvrb}
 
 \usepackage[framemethod=tikz]{mdframed}
+\usepackage{tikz, adjustbox, tikz-uml}
 %\usepackage[listings]{tcolorbox}
 %\newtcolorbox{mybox}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
 
@@ -205,6 +209,7 @@
 \usepackage{xcolor}
 
 \lstset{ %
+  float,
   basicstyle=\footnotesize\ttfamily,
   belowcaptionskip = \baselineskip,
   breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
