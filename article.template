@@ -5,40 +5,53 @@
     %twoside, % Two page layout (page indentation for binding and different headers)
     headinclude,footinclude, % Extra spacing for the header and footer
     BCOR5mm, % Binding correction
-    noopticals
 ]{scrartcl}
 
-\usepackage{fontspec}
+
+%\usepackage{fontspec}
 %\PassOptionsToPackage{protrusion=true,final}{microtype}
 %\newfontfeature{Microtype}{protrusion=default;expansion=default;}
 
-\usepackage[capitalise]{cleveref}
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
 
-\usepackage[
-    %minionprospacing,
-    %minionpro,
-    eulerchapternumbers,
-    nochapters, % Turn off chapters since this is an article
-    beramono, % Use the Bera Mono font for monospaced text (\texttt)
-    %eulermath,% Use the Euler font for mathematics
-    pdfspacing, % Makes use of pdftex’ letter spacing capabilities via the microtype package
-    dottedtoc % Dotted lines leading to the page numbers in the table of contents
-]{classicthesis} % The layout is based on the Classic Thesis style
-
-\usepackage{arsclassica} % Modifies the Classic Thesis package
-
-%\usepackage{unicode-math}
 \usepackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
+\usepackage{shapepar}
+\usepackage{graphicx} % Required for including images
+%\graphicspath{{Figures/}} % Set the default folder for images
 
+\usepackage{listings}
+%\usepackage{etoolbox}
+\PassOptionsToPackage{
+  drafting=true,    % print version information on the bottom of the pages
+  tocaligned=false, % the left column of the toc will be aligned (no indentation)
+  dottedtoc=true,  % page numbers in ToC flushed right
+  eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
+  linedheaders=false,       % chaper headers will have line above and beneath
+  floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
+  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  beramono=true
+}{classicthesis}
+\usepackage{classicthesis}
+\usepackage{arsclassica}
+
+\usepackage[english]{varioref} % More descriptive referencing
+\usepackage[capitalise]{cleveref}
 %\usepackage[showframe]{geometry}
 
+\usepackage{lipsum}
 
+%\usepackage{unicode-math}
 \usepackage{MnSymbol}
 \setmainfont{Minion Pro}
-%\setsansfont{Gill Sans}
-\usepackage[italic,noendash]{mathastext}
-
-\usepackage[auth-sc]{authblk}
+\setsansfont{TeX Gyre Pagella}
+% \setsansfont{Minion Pro}
+%\usepackage[italic,noendash]{mathastext}
+\usepackage{authblk}
 
 %\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 %\usepackage[utf8]{inputenc} % Required for including letters with accents
@@ -46,13 +59,10 @@
 \defaultfontfeatures{Mapping=tex-text}
 
 %\usepackage{mathspec}
-%\usepackage{unicode-math}
+% \usepackage{unicode-math}
 
 %\setmainfont[Numbers={Lining,Proportional}]{Minion Pro}
-%\setmathsfont(Digits,Latin,Greek)[Numbers={Lining,Proportional}]{Minion Pro}
-
-\usepackage{graphicx} % Required for including images
-\graphicspath{{Figures/}} % Set the default folder for images
+%\setmathfont[Numbers={Lining,Proportional}]{Minion Pro}
 
 \usepackage[titles]{tocloft}
 
@@ -60,7 +70,6 @@
 \numberwithin{figure}{section}
 \numberwithin{table}{section}
 
-\usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
 \usepackage{enumitem} % Required for manipulating the whitespace between and within lists
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
@@ -78,19 +87,16 @@
 % \let\thickapprox\undefined % here - PS
 % \let\hslash\undefined % here - PS
 
-\usepackage{varioref} % More descriptive referencing
-
 \usepackage{longtable}
 
 \usepackage{booktabs}
-\usepackage{mparhack}
-%\usepackage[protrusion=true,final]{microtype}
-\usepackage {ragged2e}
+\usepackage{mparhack,fixltx2e,relsize}      % typographical niceties
+\usepackage{microtype}
+\usepackage{ragged2e}
 
 \usepackage{etoolbox}
-
-\patchcmd{\graffito}{\raggedright}{\RaggedRight}{}{}
-\patchcmd{\graffito}{\raggedleft}{\RaggedLeft}{}{}
+% \patchcmd{\graffito}{\raggedright}{\RaggedRight}{}{}
+% \patchcmd{\graffito}{\raggedleft}{\RaggedLeft}{}{}
 
 %----------------------------------------------------------------------------------------
 %   THEOREM STYLES
@@ -121,12 +127,18 @@
 }
 
 % Code blocks
-
 \usepackage{color}
 \usepackage{fancyvrb}
 
+% Typesetting algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}         % https://en.wikibooks.org/wiki/LaTeX/Algorithms#Typesetting_using_the_algorithmic_package
+
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{tikz, adjustbox, tikz-uml}
+%\usetikzlibrary{eri}
+%\newcommand{\icon}[1]{\input{icons/#1}}
+
 %\usepackage[listings]{tcolorbox}
 %\newtcolorbox{mybox}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
 
@@ -136,39 +148,38 @@
 
 \newmdenv[nobreak=true,skipabove=0em,skipbelow=1em,innerlinewidth=0.5pt, backgroundcolor=mycolor2,roundcorner=4pt,linecolor=mycolor,innerleftmargin=6pt, innerrightmargin=6pt,innertopmargin=6pt,innerbottommargin=6pt, frametitlebackgroundcolor=mycolor]{mybox}
 
-	\DefineShortVerb[commandchars=\\\{\}]{\|}
-	\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-	% Add ',fontsize=\small' for more characters per line
+% \DefineShortVerb[commandchars=\\\{\}]{\|}
+% \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
 
-	\newenvironment{Shaded}{\begin{mybox}[frametitle=\scriptsize{}Input]\scriptsize{}}{\end{mybox}}
+\newenvironment{Shaded}{\begin{mybox}[frametitle=\scriptsize{}Input]\scriptsize{}}{\end{mybox}}
 
-	\let\oldverb\verbatim
-	\let\endoldverb\endverbatim
-	\renewenvironment{verbatim}{\begin{mybox}[frametitle=\scriptsize{}Output]\begin{oldverb}\scriptsize{}}{\end{oldverb}\end{mybox}}
+% \let\oldverb\verbatim
+% \let\endoldverb\endverbatim
+% \renewenvironment{verbatim}{\begin{mybox}[frametitle=\scriptsize{}Output]\begin{oldverb}\scriptsize{}}{\end{oldverb}\end{mybox}}
 
-
-    %\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-    \newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-    \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-    %\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
-    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
-	\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-	\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
-	\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-	\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-	\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-	\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
-	\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
-	\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
-	\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
-    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
-	\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
-	\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
-	\newcommand{\RegionMarkerTok}[1]{{#1}}
-	\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
-	\newcommand{\NormalTok}[1]{{#1}}
+%\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+%\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
 
 \usepackage[framemethod=tikz]{mdframed}
 
@@ -197,16 +208,25 @@
 {\end{siderules}}
 
 % Stuff
-\newenvironment{absolutelynopagebreak}
-  {\par\nobreak\vfil\penalty0\vfilneg
-   \vtop\bgroup}
-  {\par\xdef\tpd{\the\prevdepth}\egroup
-   \prevdepth=\tpd}
+% \newenvironment{absolutelynopagebreak}
+%   {\par\nobreak\vfil\penalty0\vfilneg
+%    \vtop\bgroup}
+%   {\par\xdef\tpd{\the\prevdepth}\egroup
+%    \prevdepth=\tpd}
 
 \newcommand{\ipaddress}[1]{\texttt{#1}}
-\usepackage{bm}
+
 \usepackage{listings}
 \usepackage{xcolor}
+
+\definecolor{EricssonBlue}{RGB}{0,130,240}
+\definecolor{EricssonRed}{RGB}{255,50,50 }
+\definecolor{EricssonOrange}{RGB}{255,140,10}
+\definecolor{EricssonYellow}{RGB}{250,210,45}
+\definecolor{EricssonGreen}{RGB}{15,195,115}
+\definecolor{EricssonPurple}{RGB}{175,120,210}
+\definecolor{EricssonGray5}{RGB}{242,242,242}
+\definecolor{EricssonBlack}{RGB}{24,24,24}
 
 \lstset{ %
   float,
@@ -239,8 +259,25 @@ stringstyle=\color{mycolor3},
   backgroundcolor=\color{mycolor2}   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
 }
 
-%\newfontfamily\gillius{GilliusADF}
-%\newfontfamily\futura{Futura}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 $if(title)$
     \title{\spacedallcaps{$title$}}
@@ -252,34 +289,50 @@ $if(subtitle)$
     \subtitle{$subtitle$}
 $endif$
 
-
 $if(author)$
-    \author[1]{$author.name$}%
-        %\thanks{Electronic address: \texttt{$author.email$}}}
-    \affil[1]{$author.affiliation$}
-    \affil[ ]{\textit {$author.email$}}
+    $for(author)$
+      \author[$author.affiliation$]{$author.name$%
+      \thanks{\texttt{$author.email$}}}
+    $endfor$
 $endif$
 
+
+$if(affiliation)$
+  \newcounter{affiliation}
+  \setcounter{affiliation}{1}
+    $for(affiliation)$
+      \affil[\value{affiliation}]{$affiliation$}%
+    $endfor$
+$endif$
 \date{} % An optional date to appear under the author(s)
 
 \providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parindent}{0pt}}
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parindent}{0pt}}
 
 \let\tightlist\relax
 \def\tightlist{}
 
-\usepackage{etoolbox}
+% %\usepackage{etoolbox}
 
 \makeatletter
 \patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
 \patchcmd{\ttlh@hang}{\noindent}{}{}{}
 \makeatother
 
+\def\bibindent{1em}
+\makeatletter
+\let\old@biblabel\@biblabel
+\def\@biblabel#1{\old@biblabel{#1}\kern\bibindent}
+\let\old@bibitem\bibitem
+\def\bibitem#1{\old@bibitem{#1}\leavevmode\kern-\bibindent}
+\makeatother
+
 \begin{document}
 
 \renewcommand{\sectionmark}[1]{\markright{\spacedlowsmallcaps{#1}}} % The header for all pages (oneside) or for even pages (twoside)
+
 %\renewcommand{\subsectionmark}[1]{\markright{\thesubsection~#1}} % Uncomment when using the twoside option - this modifies the header on odd pages
-\lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray} \vline}\color{halfgray}\hspace{0.5em}\rightmark\hfil}} % The header style
+% \lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray} \vline}\color{halfgray}\hspace{0.5em}\rightmark\hfil}} % The header style
 
 \pagestyle{scrheadings} % Enable the headers specified in this block
 
@@ -311,19 +364,18 @@ $if(abstract)$
     $abstract$
 $endif$
 
-
 \setlength{\parskip}{8pt}
 
-\newpage
+%\newpage
 
 $body$
 
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$else$
 $if(bibliography)$
 \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 $endif$
-
-$if(biblatex)$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 $endif$
 
 $for(include-after)$
