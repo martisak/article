@@ -20,11 +20,13 @@ $endfor$
 $endif$
 
 \usepackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
+\usepackage{commath}
+
 \usepackage{shapepar}
 \usepackage{graphicx} % Required for including images
 %\graphicspath{{Figures/}} % Set the default folder for images
 
-\usepackage{listings}
+%\usepackage{listings}
 %\usepackage{etoolbox}
 \PassOptionsToPackage{
   drafting=true,    % print version information on the bottom of the pages
@@ -33,7 +35,7 @@ $endif$
   eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
   linedheaders=false,       % chaper headers will have line above and beneath
   floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
-  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  eulermath=true,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true
 }{classicthesis}
 \usepackage{classicthesis}
@@ -45,10 +47,14 @@ $endif$
 
 \usepackage{lipsum}
 
-%\usepackage{unicode-math}
+\usepackage{unicode-math}
 \usepackage{MnSymbol}
+% \setmathfont{XITS}
 \setmainfont{Minion Pro}
+%\setmainfont[Ligatures={Required,Common,Contextual,Rare,Historic,TeX},Numbers=OldStyle,RawFeature={+ss05,+dlig,+hlig,+calt,+liga},ItalicFeatures={RawFeature={+cv04,+clig,+swsh,+calt,+liga,+hlig,+ss05},CharacterVariant=5:0}]{EB Garamond}
+
 \setsansfont{TeX Gyre Pagella}
+% \usepackage[euler-digits,euler-hat-accent]{eulervm}
 % \setsansfont{Minion Pro}
 %\usepackage[italic,noendash]{mathastext}
 \usepackage{authblk}
@@ -59,10 +65,7 @@ $endif$
 \defaultfontfeatures{Mapping=tex-text}
 
 %\usepackage{mathspec}
-% \usepackage{unicode-math}
-
-%\setmainfont[Numbers={Lining,Proportional}]{Minion Pro}
-%\setmathfont[Numbers={Lining,Proportional}]{Minion Pro}
+%\usepackage{unicode-math}
 
 \usepackage[titles]{tocloft}
 
@@ -152,38 +155,38 @@ $endif$
 % \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
 % Add ',fontsize=\small' for more characters per line
 
-\newenvironment{Shaded}{\begin{mybox}[frametitle=\scriptsize{}Input]\scriptsize{}}{\end{mybox}}
+% \newenvironment{Shaded}{\begin{mybox}[frametitle=\scriptsize{}Input]\scriptsize{}}{\end{mybox}}
 
 % \let\oldverb\verbatim
 % \let\endoldverb\endverbatim
 % \renewenvironment{verbatim}{\begin{mybox}[frametitle=\scriptsize{}Output]\begin{oldverb}\scriptsize{}}{\end{oldverb}\end{mybox}}
 
-%\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-%\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
-\newcommand{\RegionMarkerTok}[1]{{#1}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
-\newcommand{\NormalTok}[1]{{#1}}
+% %\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+% \newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+% \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+% \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+% \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+% %\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+% \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+% \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+% \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+% \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+% \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+% \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+% \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+% \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+% \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+% \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+% \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+% \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+% \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+% \newcommand{\RegionMarkerTok}[1]{{#1}}
+% \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+% \newcommand{\NormalTok}[1]{{#1}}
 
 \usepackage[framemethod=tikz]{mdframed}
 
-% New md environment for blockquotes
+%New md environment for blockquotes
 \newmdenv[
   topline=false,
   bottomline=false,
