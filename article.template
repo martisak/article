@@ -320,6 +320,7 @@ $endif$
 \makeatletter
 \patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
 \patchcmd{\ttlh@hang}{\noindent}{}{}{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \makeatother
 
 \def\bibindent{1em}
