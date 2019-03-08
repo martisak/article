@@ -301,12 +301,13 @@ $endif$
 
 
 $if(affiliation)$
-  \newcounter{affiliation}
-  \setcounter{affiliation}{1}
-    $for(affiliation)$
-      \affil[\value{affiliation}]{$affiliation$}%
-    $endfor$
+  \newcount\mycount
+  $for(affiliation)$
+    \advance\mycount 1\relax
+    \affil[\number\mycount]{$affiliation$}%
+  $endfor$
 $endif$
+
 \date{} % An optional date to appear under the author(s)
 
 \providecommand{\tightlist}{%
